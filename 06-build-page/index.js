@@ -74,9 +74,11 @@ const createHTML = () => {
             if(err) throw err;
             const tagName =`{{${file.name.split('.')[0]}}}`;
             temp = temp.replace(tagName, data);
-            fs.writeFile(newHtml, temp, err => {
-              if(err) throw err;
-            });
+            fs.rm((newHtml), {recrusive: true}, ()=> {
+              fs.writeFile(newHtml, temp, err => {
+                if(err) throw err;
+              });
+            })
           });
         }
       });
